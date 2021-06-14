@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.glavo"
-version = "0.2.1"
+version = "0.3.0"
 
 repositories {
     mavenCentral()
@@ -15,6 +15,11 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 tasks.compileJava {
     sourceCompatibility = "8"
     targetCompatibility = "8"
@@ -22,4 +27,15 @@ tasks.compileJava {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+configure<PublishingExtension> {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            version = project.version.toString()
+            artifactId = project.name
+            from(components["java"])
+        }
+    }
 }
