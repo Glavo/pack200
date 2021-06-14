@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.glavo"
-version = "0.2.0"
+version = "0.2.1"
 
 repositories {
     mavenCentral()
@@ -16,7 +16,8 @@ dependencies {
 }
 
 tasks.compileJava {
-    options.release.set(8)
+    sourceCompatibility = "8"
+    targetCompatibility = "8"
 }
 
 tasks.getByName<Test>("test") {
